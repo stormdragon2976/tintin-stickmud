@@ -1,0 +1,65 @@
+#MACRO {\e,}
+{
+	#nop {alt+,};
+	south
+}
+
+#MACRO {\e.}
+{
+	#nop {alt+.};
+	southeast
+}
+
+#MACRO {\e<}
+{
+	#nop {alt+<};
+	down
+}
+
+#MACRO {\eI}
+{
+	#nop {alt+I};
+	up
+}
+
+#MACRO {\ei}
+{
+	#nop {alt+i};
+	north
+}
+
+#MACRO {\ej}
+{
+	#nop {alt+j};
+	west
+}
+
+#MACRO {\ek}
+{
+	#nop {alt+k};
+	scan
+}
+
+#MACRO {\el}
+{
+	#nop {alt+l};
+	east
+}
+
+#MACRO {\em}
+{
+	#nop {alt+m};
+	southwest
+}
+
+#MACRO {\eo}
+{
+	#nop {alt+o};
+	northeast
+}
+
+#MACRO {\eu}
+{
+	#nop {alt+u};
+	northwest
+}
