@@ -1,3 +1,9 @@
+#FUNCTION {client_version}
+{
+     #script {result} {tt++ -V | grep 'TinTin++ ' | cut -d ' ' -f2};
+     #variable {result} {${result[1]}}
+}
+
 #FUNCTION {cut}
 {
      #nop {Can cut with specified field and delimiter, defaults are space for the delimiter and 1 for field.};
@@ -276,4 +282,6 @@
      #return #nop
 }
 
+
 #VARIABLE         {varList}  {}
+

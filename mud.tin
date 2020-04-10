@@ -1,3 +1,5 @@
+#!/tt++ -G
+
 #ALIAS {^login$}
 {
      #if {!&{connected}}

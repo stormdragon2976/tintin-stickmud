@@ -1,0 +1,62 @@
+#EVENT {IAC SB GMCP MG.char.attributes IAC SE}
+{
+    #variable gmcp_char[attributes] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.base IAC SE}
+{
+     #variable gmcp_char[base] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.info IAC SE}
+{
+     #variable gmcp_char[info] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.infoVars IAC SE}
+{
+     #variable gmcp_char[infoVars] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.maxvitals IAC SE}
+{
+     #variable gmcp_char[maxvitals] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.vitals IAC SE}
+{
+     #variable gmcp_char[vitals] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.char.wimpy IAC SE}
+{
+     #variable gmcp_char[wimpy] {%0}
+}
+
+#EVENT {IAC SB GMCP MG.room.info IAC SE}
+{
+     #variable gmcp_room[info] {%0}
+}
+
+#EVENT {IAC WILL GMCP}
+{
+     @initialize_gmcp_Nagotiation_variables{};
+     #send {${GMCP_IAC}${GMCP_DO}${GMCP_GMCP}};
+     #send {${GMCP_IAC}${GMCP_SB}${GMCP_GMCP}Core.Hello { "client": "TinTin++", "version": "@client_verrsion{}" }${GMCP_IAC}${GMCP_SE}};
+     #send {${GMCP_IAC}${GMCP_SB}${GMCP_GMCP}Core.Supports.Set [ "Core 1", "MG.char 1", "MG.room 1", "MG.team 1", " comm.channel 1"]${GMCP_IAC}${GMCP_SE}}
+}
+
+
+#FUNCTION {initializeGMCP_Nagotiation_variables}
+{
+     #format {GMCP_DO}   {%a} {253};
+     #format {GMCP_DONT} {%a} {254};
+     #format {GMCP_GMCP} {%a} {201};
+     #format {GMCP_IAC}  {%a} {255};
+     #format {GMCP_SB}   {%a} {250};
+     #format {GMCP_SE}   {%a} {240};
+     #format {GMCP_WILL} {%a} {251};
+     #format {GMCP_WONT} {%a} {252};
+     #return
+}
+
