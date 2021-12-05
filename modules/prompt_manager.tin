@@ -1,0 +1,99 @@
+#ALIAS {^HEALTH_EVENT {-?\d+} {-?\d+}$}
+{
+    #if {!&{character[audioprompt]}}
+    {
+        #variable {character[audioprompt]} {1}
+    };
+    #math {audioprompt[health]} {(%1 / %2) *100.0};
+    #if {${audioprompt[health]} < 100}
+    {
+        #format {audioprompt[health]} {%d} {${audioprompt[health]} - ${audioprompt[health]} % 10};
+        #if {${audioprompt[health]} != ${audioprompt[oldHealth]} && ${character[audioprompt]} && ${MSP[SOUND]} }
+        {
+            #if {&{health${audioprompt[health]}}}
+            {
+                SYNTH_PLAY health${audioprompt[health]};
+                #variable {audioprompt[oldHealth]} {${audioprompt[health]}}
+            }
+        }
+    };
+    #nop {#nop {Use the autorecall command if hp is below the specified %};#if {!&{auto[recallPercent]}}{#variable {auto[recallPercent]} {20};CSAVE};#if {(%1 / $MSDP_HEALTH_MAX) * 100.00 <= ${auto[recallPercent]} && $MSDP_OPPONENT_NUMBER > 0}{#if {!@is_spammed{recall}}{#if {&{auto[recall]}}{#if {!@is_spammed{breakout}}{breakout;spamset breakout 10};${auto[recall]};spamset recall}}};#nop {Use the autoheal self command if hp is below the specified %};#if {!&{autoHealSelfPercent}}{#variable {autoHealSelfPercent} {50};CSAVE};#if {(%1 / $MSDP_HEALTH_MAX) *100.00 <= $autoHealSelfPercent}{#if {&{autoHealSelf} && !@is_spammed{healSelf}}{spamset healSelf 2;${autoHealSelf}}}};
+    #local {hp} {};
+    #math {hp} {(%1 / %2) * 100.00};
+    #format {hp} {%d} {$hp};
+    @do_hook{hpPercent;$hp}
+}
+{9}
+
+#ALIAS {^MANA_EVENT {-?\d+} {-?\d+}$}
+{
+    #if {!&{character[audioprompt]}}
+    {
+        #variable {character[audioprompt]} {1}
+    };
+    #math {audioprompt[mana]} {(%1 / %2) *100.0};
+    #if {${audioprompt[mana]} < 100}
+    {
+        #format {audioprompt[mana]} {%d} {${audioprompt[mana]} - ${audioprompt[mana]} % 10};
+        #if {${audioprompt[mana]} != ${audioprompt[oldMana]} && ${character[audioprompt]} && ${MSP[SOUND]} }
+        {
+            #if {&{mana${audioprompt[mana]}}}
+            {
+                SYNTH_PLAY mana${audioprompt[mana]};
+                #variable {audioprompt[oldMana]} {${audioprompt[mana]}}
+            }
+        }
+    };
+    #local {mana} {};
+    #math {mana} {(%1 / %2) * 100.00};
+    #format {mana} {%d} {$mana};
+    @do_hook{manaPercent;$mana}
+}
+{9}
+
+#ALIAS {^STAMINA_EVENT {-?\d+} {-?\d+}$}
+{
+    #if {!&{character[audioprompt]}}
+    {
+        #variable {character[audioprompt]} {1}
+    };
+    #math {audioprompt[stamina]} {(%1 / %2) *100.0};
+    #if {${audioprompt[stamina]} < 100}
+    {
+        #format {audioprompt[stamina]} {%d} {${audioprompt[stamina]} - ${audioprompt[stamina]} % 10};
+        #if {${audioprompt[stamina]} != ${audioprompt[oldStamina]} && ${character[audioprompt]} && ${MSP[SOUND]} }
+        {
+            #if {&{movement${audioprompt[stamina]}}}
+            {
+                SYNTH_PLAY movement${audioprompt[stamina]};
+                #variable {audioprompt[oldStamina]} {${audioprompt[stamina]}}
+            }
+        }
+    };
+    #nop {#if {!&{auto[refreshPercent]}}{#variable {auto[refreshPercent]} {50};CSAVE};#if {(%1 / $MSDP_STAMINA_MAX) * 100.00 <= ${auto[refreshPercent]}}{#if {!@is_spammed{refreshSelf}}{#if {&{auto[refresh]}}{spamset refreshSelf 2;${auto[refresh]}}}}};
+    #local {stamina} {};
+    #math {stamina} {(%1 / %2) * 100.00};
+    #format {stamina} {%d} {$stamina};
+    @do_hook{staminaPercent;$stamina}
+}
+{9}
+
+
+
+#EVENT {VARIABLE UPDATE GMCP_CHAR_VITALS}
+{
+    #local {tmp} {%1};
+    HEALTH_EVENT ${tmp[hp]} ${tmp[maxhp]};
+    MANA_EVENT ${tmp[sp]} ${tmp[maxsp]};
+    STAMINA_EVENT ${tmp[fp]} ${tmp[maxfp]}
+}
+
+
+
+#VARIABLE {audioprompt}
+{
+    {oldHealth} {0}
+    {oldMana} {0}
+    {oldStamina} {0}
+}
+
