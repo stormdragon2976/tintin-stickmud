@@ -19,7 +19,7 @@
     };
     #variable {name} {${tmp[name]}};
     #class {$name} {read} {${HOME}/${name}};
-    #class {$name} {open};
+    #line oneshot #ticker {openchar} {#class {$name} {open}} {0.1};
     #variable {OLD_NAME} {$name}
 }
 
