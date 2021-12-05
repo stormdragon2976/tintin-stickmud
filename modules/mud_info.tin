@@ -1,3 +1,3 @@
-#VARIABLE         {mudAddress}  {address.ext}
-#VARIABLE         {mudPort}  {4000}
-#VARIABLE         {mudSessionName}  {Game's Ful name}
+#VARIABLE         {mudAddress}  {stickmud.com}
+#VARIABLE         {mudPort}  {7680}
+#VARIABLE         {mudSessionName}  {Stickmud}
