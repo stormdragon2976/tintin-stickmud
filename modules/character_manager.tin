@@ -1,0 +1,32 @@
+#ALIAS {^CSAVE$}
+{
+    #if {{$name} == {}}
+    {
+        #return
+    };
+    #class {$name} {write} {${HOME}/${name}}
+}
+{9}
+
+
+
+#EVENT {VARIABLE UPDATE GMCP_CHAR_NAME}
+{
+    #local {tmp} {%1};
+    #if {{${tmp[name]}} == {${OLD_NAME}}}
+    {
+        #return
+    };
+    #variable {name} {${tmp[name]}};
+    #class {$name} {read} {${HOME}/${name}};
+    #class {$name} {open};
+    #variable {OLD_NAME} {$name}
+}
+
+
+
+#TICKER {csave} {CSAVE} {90}
+
+#VARIABLE {OLD_NAME} {}
+#VARIABLE {name} {}
+
