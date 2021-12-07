@@ -11,6 +11,19 @@
     #nop
 }
 
+#ALIAS {^GMCP_STARTUP$}
+{
+    #format IAC %a 255;
+    #format DONT %a 254;
+    #format DO %a 253;
+    #format WONT %a 252;
+    #format WILL %a 251;
+    #format SB %a 250;
+    #format SE %a 240;
+    #format GMCP %a 201
+}
+{9}
+
 
 
 #EVENT {IAC SB GMCP}
@@ -31,12 +44,6 @@
 }
 
 
-#VARIABLE {DO} {ý}
-#VARIABLE {DONT} {þ}
-#VARIABLE {GMCP} {É}
-#VARIABLE {IAC} {ÿ}
-#VARIABLE {SB} {ú}
-#VARIABLE {SE} {ð}
-#VARIABLE {WILL} {û}
-#VARIABLE {WONT} {ü}
+
+#VARIABLE {gmcpStartup} {GMCP_STARTUP}
 
