@@ -1,3 +1,24 @@
+#ACTION {^Titles longer than 30 characters may not display completely.$}
+{
+    #if {${auto[title]} && $settingTitle}
+    {
+        #line {gag};
+        #variable {settingTitle} {0}
+    }
+}
+{9}
+
+#ACTION {^Your title is now <%1>.$}
+{
+    #if {{%1} == {${music[newAutoTitleString]}} && $settingTitle}
+    {
+        #line {gag};
+        #variable {settingTitle} {0}
+    }
+}
+{9}
+
+
 #ALIAS {^Get_Music_Message_String$}
 {
     #script {i} {playerctl -p %any,chromium metadata -f '{{artist}} - {{title}}'};
@@ -10,6 +31,21 @@
     #replace {msg} {ö} {o};
     #replace {msg} {by ""} {};
     #replace {msg} {from ""} {}
+}
+{9}
+
+#ALIAS {^SET_AUTOTITLE$}
+{
+    #if {${auto[title]}}
+    {
+        Get_Music_Message_String;
+        #if {{${music[newAutoTitleString]}} != {${music[oldAutoTitleString]}}}
+        {
+            #variable {music[oldAutoTitleString]} {${music[newAutoTitleString]}};
+            #variable {settingTitle} {1};
+            title ${music[newAutoTitleString]}
+        }
+    }
 }
 {9}
 
@@ -42,6 +78,21 @@
         #script {i} {curl --connect-timeout 10 -s --data "signature=${music[links][apiKey]}" --data "action=shorturl" --data "format=text" --data-urlencode "url=${music[links][longUrl]}" ${music[links][apiUrl]}};
         #variable {music[links][shortUrl]} {${i[1]}};
         %2 Now playing: $msg via ${i[1]}. ${music[links][shortUrl]}
+    }
+}
+{9}
+
+#ALIAS {^{auto|noauto}title$}
+{
+    #if {{%0} == {autotitle}}
+    {
+        NOTIFY Your title will automatically change to currently playing song.;
+        #variable {auto[title]} {1}
+    };
+    #else
+    {
+        NOTIFY Your title will no longer be automatically set.;
+        #variable {auto[title]} {0}
     }
 }
 {9}
@@ -108,8 +159,8 @@
     #nop {Music player next};
     #system {playerctl -p %any,chromium next};
     #nop {Currently playing track};
-    Get_Music_Message_String;
-    NOTIFY $msg.
+    #delay {0.5} Get_Music_Message_String;
+    #delay 0.5 {NOTIFY $msg.}
 }
 
 #MACRO {\eC}
@@ -122,7 +173,7 @@
 {
     #if {!&{music[channel]}}
     {
-        #variable {music[channel]} {ooc}
+        #variable {music[channel]} {music}
     };
     mpost ${music[channel]}
 }
@@ -188,8 +239,8 @@
     #nop {Music player previous track.};
     #system {playerctl -p %any,chromium previous};
     #nop {Currently playing track};
-    Get_Music_Message_String;
-    NOTIFY $msg.
+    #delay 0.5 Get_Music_Message_String;
+    #delay 0.5 {NOTIFY $msg.}
 }
 
 #MACRO {\e_}
@@ -199,4 +250,8 @@
 }
 
 
+#TICKER {autotitle} {SET_AUTOTITLE} {30}
+
 #VARIABLE {msg} {}
+#VARIABLE {settingTitle} {}
+
