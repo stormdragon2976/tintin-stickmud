@@ -367,7 +367,7 @@
 {
     {1} {All}
     {2} {ooc}
-    {3} {tell}
+    {3} {Tell}
     {4} {newbie}
 }
 #VARIABLE {channelBufferIndex} {1}
