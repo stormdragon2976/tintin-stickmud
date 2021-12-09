@@ -374,6 +374,7 @@ PLAY broadcast.wav
     {2} {ooc}
     {3} {Tell}
     {4} {newbie}
+    {5} {broadcast}
 }
 #VARIABLE {channelBufferIndex} {1}
 #VARIABLE {currentSplitRows} {1}
