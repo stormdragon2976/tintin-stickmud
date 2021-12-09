@@ -71,7 +71,7 @@
 
 #MACRO {\cc}
 {
-#nop {Don't know if stickmud has a clear queue...
+#nop {Don't know if stickmud has a clear queue...;
      #if {!@is_spammed{breakout}}
      {
           spamset breakout;

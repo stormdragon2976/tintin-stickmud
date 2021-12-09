@@ -1,6 +1,11 @@
 #ALIAS {^Channel_Event %S %2}
 {
-    SYNTH_PLAY %1Channel;
+#if {{%1} == {broadcast}} {
+PLAY broadcast.wav
+};
+#else {
+    SYNTH_PLAY %1Channel
+};
     #list {channel[All]} {insert} {1} {%2};
     #list {channel[%1]} {insert} {1} {%2};
     #list {channel[%1]} {size} {i};
