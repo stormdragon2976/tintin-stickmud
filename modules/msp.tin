@@ -26,7 +26,7 @@
 	};
 	#if {${MSP[SOUND]}}
 	{
-		#line {substitute} {escape} #system {play -qV0 "$($shuf -n1 -e ${HOME}/sounds/%1)" gain ${MSP[VOLUME]} &> /dev/null &}
+		#line {substitute} {escape} #system {play -qV0 "$($shuf -n1 -e sounds/%1)" gain ${MSP[VOLUME]} &> /dev/null &}
 	}
 }
 {9}

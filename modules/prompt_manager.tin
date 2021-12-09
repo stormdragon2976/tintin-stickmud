@@ -85,7 +85,16 @@
     #local {tmp} {%1};
     HEALTH_EVENT ${tmp[hp]} ${tmp[maxhp]};
     MANA_EVENT ${tmp[sp]} ${tmp[maxsp]};
-    STAMINA_EVENT ${tmp[fp]} ${tmp[maxfp]}
+    STAMINA_EVENT ${tmp[fp]} ${tmp[maxfp]};
+    #if {${tmp[fp]} / ${tmp[maxfp]} * 100.00 <= 95 || ${tmp[sp]} / ${tmp[maxsp]} * 100.00 <= 95 || ${tmp[hp]} / ${tmp[maxhp]} * 100.00 <= 95}
+    {
+        #variable {regenSound} {1}
+    };
+    #elseif {${tmp[fp]} / ${tmp[maxfp]} * 100.00 == 100 && ${tmp[sp]} / ${tmp[maxsp]} * 100.00 == 100 && ${tmp[hp]} / ${tmp[maxhp]} * 100.00 == 100 && ${regenSound}}
+    {
+        play regen-complete;
+        #variable {regenSound} {0}
+    }
 }
 
 
@@ -96,4 +105,5 @@
     {oldMana} {0}
     {oldStamina} {0}
 }
+#VARIABLE {regenSound} {0}
 
