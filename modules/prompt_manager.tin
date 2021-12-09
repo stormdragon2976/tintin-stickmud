@@ -92,7 +92,7 @@
     };
     #elseif {${tmp[fp]} / ${tmp[maxfp]} * 100.00 == 100 && ${tmp[sp]} / ${tmp[maxsp]} * 100.00 == 100 && ${tmp[hp]} / ${tmp[maxhp]} * 100.00 == 100 && ${regenSound}}
     {
-        play regen-complete;
+        PLAY regen-complete.wav;
         #variable {regenSound} {0}
     }
 }
