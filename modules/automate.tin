@@ -1,0 +1,19 @@
+#ALIAS {^gac %d$}
+{
+    #local {x} {};
+    #loop {1} {%1} {x}
+    {
+        get all from corpse $x
+    }
+}
+{9}
+
+#ALIAS {^gac$}
+{
+    gac 1
+}
+{9}
+
+
+
+
