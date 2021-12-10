@@ -28,11 +28,11 @@
 
 #EVENT {IAC SB GMCP}
 {
-    #local {name} {};
-    #format {name} {%u} {gmcp_%0};
-    #replace {name} {.} {_};
+    #local {var} {};
+    #format {var} {%u} {gmcp_%0};
+    #replace {var} {.} {_};
     #class {gmcp} {open};
-    #variable {$name} {%1};
+    #variable {$var} {%1};
     #class {gmcp} {close}
 }
 
