@@ -1,3 +1,5 @@
+#VARIABLE {PartyChannel} {"|sox -np synth .2 sq B3 tri E3" "|sox -np synth .55 tri B2 sq E2" remix - phaser gain -3}
+#VARIABLE {TellChannel} {"|sox -np synth pl E3 pl E4 pl D3 pl D4 pl G2 pl G3 delay 0 .05 .25 .3 .5 .55 remix - fade p 0 .74 .75 flanger norm -10 tempo 1.8"}
 #VARIABLE {cannot_go_down} {"|sox -np synth 0.5 tri 200:100 tri 500:300 remix - fade 0 0.2 0.5"}
 #VARIABLE {cannot_go_east} {"|sox -np synth 0.5 tri 400:300 tri 700:500 remix - fade 0 0.2 0.5" remix v0.3 v0.9}
 #VARIABLE {cannot_go_north} {"|sox -np synth 0.5 tri 300:400 tri 500:700 remix - fade 0 0.2 0.5"}
@@ -61,7 +63,6 @@
 #VARIABLE {notificationSound} {"|sox -np synth sin 900 sin 1100 delay 0 .1 fade h 0 .25 .2"}
 #VARIABLE {oocChannel} {"|sox -np synth .25 sin 440:480 sin 480:520 remix - reverse norm -8 pitch -1000"}
 #VARIABLE {shardSound} {"|sox -np synth 2 sine 700:1000 sine 900:1200 fade 0 2 0 remix - norm -12 repeat 3 overdrive reverb speed 4"}
-#VARIABLE {TellChannel} {"|sox -np synth pl E3 pl E4 pl D3 pl D4 pl G2 pl G3 delay 0 .05 .25 .3 .5 .55 remix - fade p 0 .74 .75 flanger norm -10 tempo 1.8"}
 #VARIABLE {warningSound} {"|sox -np synth pl C3 pl E3 pl G3 fade 0 .25 .1" "|sox -np synth pl C3 pl E3 pl G3 fade l 0 .75 1" remix -}
 #VARIABLE {yellChannel} {"|sox -np synth whi B2 tri B3 saw B4 sin fade 0 1 .25 remix - speed 2"}
 

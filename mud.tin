@@ -68,7 +68,7 @@
     };
     #else
     {
-        ?S #nop {Kill, load, or reload a specified module.};
+        #nop {Kill, load, or reload a specified module.};
         #if {{%2} != {{msdp|gmcp}}}
         {
             #if {{%1} == {{kill|reload}}}
