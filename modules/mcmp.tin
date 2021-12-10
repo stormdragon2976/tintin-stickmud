@@ -1,5 +1,9 @@
 #EVENT {VARIABLE UPDATE GMCP_CLIENT_MEDIA_PLAY}
 {
+#if {!&{bgm}}
+{
+#variable {bgm} {true}
+};
 #local {tmp} {%1};
 #if {{${tmp[name]}} != {$OLD_MUSIC} && {${tmp[type]}} == {music}}
 {
