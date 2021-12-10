@@ -1,0 +1,53 @@
+#EVENT {VARIABLE UPDATE GMCP_CLIENT_MEDIA_PLAY}
+{
+#local {tmp} {%1};
+#if {{${tmp[name]}} != {$OLD_MUSIC} && {${tmp[type]}} == {music}}
+{
+PLAY_MUSIC ${tmp[name]};
+#variable {OLD_MUSIC} {${tmp[name]}}
+}
+}
+
+#ALIAS {^PLAY_MUSIC %1}
+{
+	#if {!&{MCMP[VOLUME]}}
+	{
+		#variable {MCMP[VOLUME]} {0}
+	};
+	#if {{$bgm} == {true}}
+	{
+			#if {{$musicSoundFilePID} != {false}}
+			{
+				#system {kill $musicSoundFilePID;echo "false" > .musicSoundFilePID};
+				#variable {musicSoundFilePID} {false}
+			};
+			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%1" ]] ; then play -qV0 "StickMUDSounds/sounds/%1" repeat - gain ${MCMP[VOLUME]} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
+	}
+}
+{9}
+
+#ALIAS {^{nobgm|bgm}$}
+{
+	#if {{%0} == {bgm}}
+	{
+		#variable {bgm} {true};
+		#showme {Tile ambiance enabled.}
+	};
+	#else
+	{
+		#if {{$musicSoundFilePID} != {false}}
+		{
+			#system {kill $musicSoundFilePID;echo "false" >.musicSoundFilePID };
+			#variable {musicSoundFilePID} {false}
+		};
+		#unvariable {bgm};
+		#variable {OLD_MUSIC} {};
+		#showme {MUD music disabled.}
+	}
+}
+{9}
+
+
+#VARIABLE         {OLD_MUSIC}  {}
+#VARIABLE         {musicSoundFile}  {}
+#VARIABLE         {musicSoundFilePID}  {false}
