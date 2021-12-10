@@ -1,65 +1,82 @@
+#EVENT {VARIABLE UPDATE GMCP_ROOM_INFO}
+{
+    #local {tmp} {%1};
+    #if {{$OLD_AREA_NAME} != {${tmp[area]}}}
+    {
+        #variable {OLD_AREA_NAME} {${tmp[area]}};
+        PLAY new_area.wav;
+        NOTIFY Entering ${tmp[area]}
+    }
+}
+
+
 #MACRO {\e,}
 {
-	#nop {alt+,};
-	south
+    #nop {alt+,};
+    south
 }
 
 #MACRO {\e.}
 {
-	#nop {alt+.};
-	southeast
+    #nop {alt+.};
+    southeast
 }
 
 #MACRO {\e<}
 {
-	#nop {alt+<};
-	down
+    #nop {alt+<};
+    down
 }
 
 #MACRO {\eI}
 {
-	#nop {alt+I};
-	up
+    #nop {alt+I};
+    up
 }
 
 #MACRO {\ei}
 {
-	#nop {alt+i};
-	north
+    #nop {alt+i};
+    north
 }
 
 #MACRO {\ej}
 {
-	#nop {alt+j};
-	west
+    #nop {alt+j};
+    west
 }
 
 #MACRO {\ek}
 {
-	#nop {alt+k};
-	scan
+    #nop {alt+k};
+    scan
 }
 
 #MACRO {\el}
 {
-	#nop {alt+l};
-	east
+    #nop {alt+l};
+    east
 }
 
 #MACRO {\em}
 {
-	#nop {alt+m};
-	southwest
+    #nop {alt+m};
+    southwest
 }
 
 #MACRO {\eo}
 {
-	#nop {alt+o};
-	northeast
+    #nop {alt+o};
+    northeast
 }
 
 #MACRO {\eu}
 {
-	#nop {alt+u};
-	northwest
+    #nop {alt+u};
+    northwest
 }
+
+
+
+#VARIABLE {OLD_AREA_NAME} {}
+
