@@ -31,7 +31,7 @@ PLAY_MUSIC ${tmp[name]};
 	#if {{%0} == {bgm}}
 	{
 		#variable {bgm} {true};
-		#showme {Tile ambiance enabled.}
+		#showme {MUD music enabled.}
 	};
 	#else
 	{
