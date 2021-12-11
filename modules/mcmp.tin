@@ -7,12 +7,12 @@
 #local {tmp} {%1};
 #if {{${tmp[name]}} != {$OLD_MUSIC} && {${tmp[type]}} == {music}}
 {
-PLAY_MUSIC ${tmp[name]};
+PLAY_MUSIC ${tmp[volume]} ${tmp[name]};
 #variable {OLD_MUSIC} {${tmp[name]}}
 }
 }
 
-#ALIAS {^PLAY_MUSIC %1}
+#ALIAS {^PLAY_MUSIC %d %2}
 {
 	#if {!&{MCMP[VOLUME]}}
 	{
@@ -25,7 +25,9 @@ PLAY_MUSIC ${tmp[name]};
 				#system {kill $musicSoundFilePID;echo "false" > .musicSoundFilePID};
 				#variable {musicSoundFilePID} {false}
 			};
-			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%1" ]] ; then play -qV0 "StickMUDSounds/sounds/%1" repeat - gain ${MCMP[VOLUME]} gain -0.${GMCP_CLIENT_MEDIA_PLAY[volume]} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
+#local {vol} {};
+#format {vol} {%d} {%1 / 4 - 20};
+			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%2" ]] ; then play -qV0 "StickMUDSounds/sounds/%2" repeat - gain ${MCMP[VOLUME]} gain ${vol} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
 	}
 }
 {9}
