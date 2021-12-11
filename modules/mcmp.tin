@@ -25,7 +25,7 @@ PLAY_MUSIC ${tmp[name]};
 				#system {kill $musicSoundFilePID;echo "false" > .musicSoundFilePID};
 				#variable {musicSoundFilePID} {false}
 			};
-			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%1" ]] ; then play -qV0 "StickMUDSounds/sounds/%1" repeat - gain ${MCMP[VOLUME]} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
+			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%1" ]] ; then play -qV0 "StickMUDSounds/sounds/%1" repeat - gain ${MCMP[VOLUME]} gain -0.${GMCP_CLIENT_MEDIA_PLAY[volume]} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
 	}
 }
 {9}
