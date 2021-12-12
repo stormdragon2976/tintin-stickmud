@@ -4,7 +4,31 @@
     {
         #return
     };
-    #class {$name} {write} {${HOME}/${name}}
+    #class {$name} {write} {${HOME}/${name}};
+    #line substitute variables #history {write} {${HOME}/${name}.history}
+}
+{9}
+
+#ALIAS {^cmod{kill|load|reload} %2$}
+{
+    #if {{%1} == {{kill|reload}}}
+    {
+        #if {&{c_%2Shutdown}}
+        {
+            ${c_%2Shutdown}
+        };
+        #class {character_%2} {kill};
+        NOTIFY Character module %2 killed.
+    };
+    #if {{%1} == {{load|reload}}}
+    {
+        #script {if [ -r "${HOME}/modules/%2.tin" ] ; then echo "#class {character_%2} {read} {${HOME}/modules/%2.tin};" ; elif [ -r "${HOME}/${name}.modules/%2.tin" ] ; then echo "#class {character_%2} {read} {${HOME}/${name}.modules/%2.tin};" ; else echo "NOTIFY Character module %2 not found." ; fi};
+        #if {&{c_%2Startup}}
+        {
+            ${c_%2Startup}
+        };
+        NOTIFY Character module %2 loaded.
+    }
 }
 {9}
 
@@ -19,6 +43,28 @@
     };
     #variable {name} {${tmp[name]}};
     #class {$name} {read} {${HOME}/${name}};
+    #line substitute variables #history {read} {${HOME}/${name}.history};
+    #local {scr} {};
+    #system {if [ ! -d "${HOME}/modules" ] ; then mkdir "${HOME}/modules" ; fi ; if [ ! -d "${HOME}/${name}.modules" ] ; then mkdir "${HOME}/${name}.modules" ; fi};
+    #script {scr} {IFS=$'\n' ; for module in $(find "${HOME}/modules/" -maxdepth 1 -iname "*.tin"); do echo "$(basename "$module" .tin)";done};
+    #local {z} {};
+    #foreach {${scr[%*]}} {z}
+    {
+        #class {character_$z} {read} {${HOME}/modules/${z}.tin};
+        #if {&{c_${z}Startup}}
+        {
+            ${c_${z}Startup}
+        }
+    };
+    #script {scr} {IFS=$'\n' ; for module in $(find "${HOME}/${name}.modules/" -maxdepth 1 -iname "*.tin"); do echo "$(basename "$module" .tin)";done};
+    #foreach {${scr[%*]}} {z}
+    {
+        #class {character_$z} {read} {${HOME}/${name}.modules/${z}.tin};
+        #if {&{c_${z}Startup}}
+        {
+            ${c_${z}Startup}
+        }
+    };
     #line oneshot #ticker {openchar} {#class {$name} {open}} {0.1};
     #variable {OLD_NAME} {$name}
 }
