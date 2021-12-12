@@ -1,0 +1,6 @@
+#alias {^tnl$}
+{
+#echo {%s} {${GMCP_CHAR_VITALS[nl]} to next level}
+}
+{9}
+
