@@ -1,12 +1,27 @@
+#event {PROGRAM TERMINATION}
+{
+#script {pkill -P $$}
+}
+
+#EVENT {VARIABLE UPDATE GMCP_CLIENT_MEDIA_STOP}
+{
+#local {tmp} {%1};
+#if {{${tmp[type]}} == {music}}
+{
+@STOP_MUSIC{}
+};
+#if {{${tmp[key]}} == {ambience}}
+{
+@STOP_MUSIC{}
+}
+}
+
 #EVENT {VARIABLE UPDATE GMCP_CLIENT_MEDIA_PLAY}
 {
-#if {!&{bgm}}
-{
-#variable {bgm} {true}
-};
 #local {tmp} {%1};
 #if {{${tmp[name]}} != {$OLD_MUSIC} && {${tmp[type]}} == {music}}
 {
+@STOP_MUSIC{};
 PLAY_MUSIC ${tmp[volume]} ${tmp[name]};
 #variable {OLD_MUSIC} {${tmp[name]}}
 }
@@ -18,42 +33,27 @@ PLAY_MUSIC ${tmp[volume]} ${tmp[name]};
 	{
 		#variable {MCMP[VOLUME]} {0}
 	};
-	#if {{$bgm} == {true}}
-	{
-			#if {{$musicSoundFilePID} != {false}}
-			{
-				#system {kill $musicSoundFilePID;echo "false" > .musicSoundFilePID};
-				#variable {musicSoundFilePID} {false}
-			};
 #local {vol} {};
 #format {vol} {%d} {%1 / 4 - 20};
-			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%2" ]] ; then play -qV0 "StickMUDSounds/sounds/%2" repeat - gain ${MCMP[VOLUME]} gain ${vol} &> /dev/null&echo "$!" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";else echo "false" > .musicSoundFilePID;echo "#variable {musicSoundFilePID} {$(cat .musicSoundFilePID)}";fi'}
-	}
+			#script {bash -c 'if [[ -f "StickMUDSounds/sounds/%2" ]] ; then play -qV0 "StickMUDSounds/sounds/%2" repeat - gain ${MCMP[VOLUME]} gain ${vol} &> /dev/null&echo "$!" > .musicSoundFilePID;else echo "false" > .musicSoundFilePID;fi'}
 }
 {9}
 
-#ALIAS {^{nobgm|bgm}$}
+#function {STOP_MUSIC}
 {
-	#if {{%0} == {bgm}}
-	{
-		#variable {bgm} {true};
-		#showme {MUD music enabled.}
-	};
-	#else
-	{
-		#if {{$musicSoundFilePID} != {false}}
+		#local {musicSoundFilePID} {};
+		#script {musicSoundFilePID} {cat .musicSoundFilePID};
+		#variable {musicSoundFilePID} {${musicSoundFilePID[1]}};
+		#if {{${musicSoundFilePID}} != {false}}
 		{
-			#system {kill $musicSoundFilePID;echo "false" >.musicSoundFilePID };
-			#variable {musicSoundFilePID} {false}
+			#system {kill ${musicSoundFilePID};echo "false" >.musicSoundFilePID};
+			#variable {musicSoundFilePID} {false};
+		#variable {OLD_MUSIC} {}
 		};
-		#unvariable {bgm};
-		#variable {OLD_MUSIC} {};
-		#showme {MUD music disabled.}
-	}
+		#return #nop
 }
 {9}
 
 
 #VARIABLE         {OLD_MUSIC}  {}
 #VARIABLE         {musicSoundFile}  {}
-#VARIABLE         {musicSoundFilePID}  {false}
