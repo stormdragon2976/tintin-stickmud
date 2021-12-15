@@ -4,3 +4,9 @@
 }
 {9}
 
+#alias {^alig{n|nm|nme|nmen|nment}$}
+{
+#echo {%s} {You are ${GMCP_CHAR_STATUS[align]}.}
+}
+{9}
+
