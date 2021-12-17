@@ -1,0 +1,28 @@
+#ALIAS {^{noc|c}spam$}
+{
+     #if {{%0} == {cspam}}
+     {
+          #class {applied_spam_settings} {read} {modules/spam.rules};
+          #class {$MSDP_CHARACTER_NAME} {open};
+          #variable {cspam} {1};
+          NOTIFY Client side spam filters applied.
+     };
+     #else
+     {
+          #class {applied_spam_settings} {kill};
+          #variable {cspam} {0};
+          NOTIFY Client side spam filters removed.
+     };
+     CSAVE
+}
+{9}
+
+
+#MACRO {\e/}
+{
+     #nop {toggle the locked state of the buffer};
+     #echo {buffer lock toggled.};
+     #buffer {lock}
+}
+
+
