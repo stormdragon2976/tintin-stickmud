@@ -1,1 +1,7 @@
 #gag {^{You turn on your heels and mumble, "Scanning... Beep boop, beep boop...".|Your scan of the surroundings:}$} {5}
+#gag {^You {dodge|twist|sidestep|leap|jump|duck} badly allowing %* a better strike!$} {5}
+#gag {^You dodge badly, leaving you prone to a better strike!$} {5}
+#gag {^You try to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manage to get partially hit.$} {5}
+#gag {^%* {dodge|twist|sidestep|leap|jump|duck}s badly allowing %* a better strike!$} {5}
+#gag {^%* dodges badly, leaving %* prone to a better strike!$} {5}
+#gag {^%* tries to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manages to get partially hit.$} {5}
