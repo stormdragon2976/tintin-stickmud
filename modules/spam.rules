@@ -2,6 +2,10 @@
 #gag {^You {dodge|twist|sidestep|leap|jump|duck} badly allowing %* a better strike!$} {5}
 #gag {^You dodge badly, leaving you prone to a better strike!$} {5}
 #gag {^You try to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manage to get partially hit.$} {5}
+#gag {^You fail to dodge and take the full brunt of the damage.$} {5}
+#gag {^You try dodging %*'s hit, but only manage to lessen the impact.$} {5}
 #gag {^%* {dodge|twist|sidestep|leap|jump|duck}s badly allowing %* a better strike!$} {5}
 #gag {^%* dodges badly, leaving %* prone to a better strike!$} {5}
 #gag {^%* tries to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manages to get partially hit.$} {5}
+#gag {^%* fails to dodge and takes the full brunt of the damage.$} {5}
+#gag {^%* tries dodging %*'s hit, but only manages to lessen the impact.$} {5}
