@@ -9,3 +9,4 @@
 #gag {^%* tries to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manages to get partially hit.$} {5}
 #gag {^%* fails to dodge and takes the full brunt of the damage.$} {5}
 #gag {^%* tries dodging %*'s hit, but only manages to lessen the impact.$} {5}
+#gag {^Replying %1.$} {5}
