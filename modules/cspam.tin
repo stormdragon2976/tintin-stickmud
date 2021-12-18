@@ -3,7 +3,7 @@
      #if {{%0} == {cspam}}
      {
           #class {applied_spam_settings} {read} {modules/spam.rules};
-          #class {$MSDP_CHARACTER_NAME} {open};
+          #class {$name} {open};
           #variable {cspam} {1};
           NOTIFY Client side spam filters applied.
      };
