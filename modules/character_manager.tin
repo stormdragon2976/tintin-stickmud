@@ -42,6 +42,10 @@
         #return
     };
     #variable {name} {${tmp[name]}};
+    #if {${cspam} == 1}
+    {
+        cspam
+    };
     #class {$name} {read} {${HOME}/${name}};
     #line substitute variables #history {read} {${HOME}/${name}.history};
     #local {scr} {};
@@ -66,11 +70,7 @@
         }
     };
     #line oneshot #ticker {openchar} {#class {$name} {open}} {0.1};
-    #variable {OLD_NAME} {$name};
-    #if {${cspam} == 1}
-    {
-        cspam
-    }
+    #variable {OLD_NAME} {$name}
 }
 
 
