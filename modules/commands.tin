@@ -10,3 +10,7 @@
 }
 {9}
 
+#alias {^ar{e|ea}$} {
+#echo {%s} {You are in ${GMCP_ROOM_INFO[area]}.}
+}
+{9}
