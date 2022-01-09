@@ -1,11 +1,23 @@
+#ACTION {^As %* falls, there is a bright flash!$}
+{
+    #nop {Hook name: flash};
+    #nop {Hook args: Name of mob.};
+    @do_hook{flash,%1};
+    PLAY kill_flash.wav
+}
+{9}
+
+
 #ALIAS {^Channel_Event %S %2}
 {
-#if {{%1} == {broadcast}} {
-PLAY broadcast.wav
-};
-#else {
-    SYNTH_PLAY %1Channel
-};
+    #if {{%1} == {broadcast}}
+    {
+        PLAY broadcast.wav
+    };
+    #else
+    {
+        SYNTH_PLAY %1Channel
+    };
     #list {channel[All]} {insert} {1} {%2};
     #list {channel[%1]} {insert} {1} {%2};
     #list {channel[%1]} {size} {i};
