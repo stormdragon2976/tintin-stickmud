@@ -42,12 +42,12 @@
         #return
     };
     #variable {name} {${tmp[name]}};
-    #if {${cspam} == 1}
-    {
-        cspam
-    };
     #class {$name} {read} {${HOME}/${name}};
     #line substitute variables #history {read} {${HOME}/${name}.history};
+    #if {${cspam} == 1}
+    {
+        #class {applied_spam_settings} {read} {modules/spam.rules}
+    };
     #local {scr} {};
     #system {if [ ! -d "${HOME}/modules" ] ; then mkdir "${HOME}/modules" ; fi ; if [ ! -d "${HOME}/${name}.modules" ] ; then mkdir "${HOME}/${name}.modules" ; fi};
     #script {scr} {IFS=$'\n' ; for module in $(find "${HOME}/modules/" -maxdepth 1 -iname "*.tin"); do echo "$(basename "$module" .tin)";done};
