@@ -1,15 +1,3 @@
-#EVENT {VARIABLE UPDATE GMCP_ROOM_INFO}
-{
-    #local {tmp} {%1};
-    #if {{$OLD_AREA_NAME} != {${tmp[area]}}}
-    {
-        #variable {OLD_AREA_NAME} {${tmp[area]}};
-        PLAY new_area.wav;
-        NOTIFY Entering ${tmp[area]}
-    }
-}
-
-
 #MACRO {\e,}
 {
     #nop {alt+,};

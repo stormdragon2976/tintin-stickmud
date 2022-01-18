@@ -1,0 +1,19 @@
+#event {VARIABLE UPDATE GMCP_ROOM_INFO} {
+#local {i} {};
+#local {tmp} {%1};
+#if {{$OLD_AREA_NAME} != {${tmp[area]}}}
+    {
+        #variable {OLD_AREA_NAME} {${tmp[area]}};
+        PLAY new_area.wav;
+        NOTIFY Entering ${tmp[area]}
+    };
+#map {goto} {${tmp[num]}} {dig};
+#map {set} {roomname} {${tmp[name]}};
+#map {set} {roomterrain} {${tmp[environment]}};
+#if {{${tmp[area]}} != {}} {
+#map {set} {roomarea} {${tmp[area]}}
+};
+#foreach {*{tmp[exits][]}} {i} {
+#map {dig} {${i}} {${tmp[exits][$i]}}
+}
+}
