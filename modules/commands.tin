@@ -1,16 +1,29 @@
-#alias {^tnl$}
+#ALIAS {^alig{n|nm|nme|nmen|nment}$}
 {
-#echo {%s} {${GMCP_CHAR_VITALS[nl]} to next level}
+    #echo {%s} {You are ${GMCP_CHAR_STATUS[align]}.}
 }
 {9}
 
-#alias {^alig{n|nm|nme|nmen|nment}$}
+#ALIAS {^ar{e|ea}$}
 {
-#echo {%s} {You are ${GMCP_CHAR_STATUS[align]}.}
+    #echo {%s} {You are in ${GMCP_ROOM_INFO[area]}.}
 }
 {9}
 
-#alias {^ar{e|ea}$} {
-#echo {%s} {You are in ${GMCP_ROOM_INFO[area]}.}
+#ALIAS {^charswitch$}
+{
+    #gts {#line oneshot #ticker {recon} {login} {300}};
+    quit;
+    #showme {Login will execute in 5 minutes.}
 }
 {9}
+
+#ALIAS {^tnl$}
+{
+    #echo {%s} {${GMCP_CHAR_VITALS[nl]} to next level}
+}
+{9}
+
+
+
+

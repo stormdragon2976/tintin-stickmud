@@ -1,15 +1,9 @@
-# tintin-base-pack
+# Tintin Stickmud feature pack
+Written by Michael "lilmike" Taboada, Hunter Jozwiak, and Billy "storm dragon" Wolfe.
+Created from the [tintin base pack](https://gitlab.com/stormdragon2976/tintin-base-pack).
 
-To use this, create a pack for your MUD, then put the files from this into that. You can expand it as needed. Please follow the steps in the setup section after you have created the pack for yourr MUD.
-
-
-## Setup
-
-
-* rename mud.tin to something meaningful for your mud. You may want to call it something like "gamename.tin". You then would launch it with ./gamename.tin
-
-* Find the line at the end of the file that reads #VARIABLE         {tintinPackName} {} and set your pack name in the second set of braces. Replace spaces with - or _.
-
-* Update the MOTD file with whatever information you want displayed when the pack starts.
-
-* Configure the information in modules/mud_info.tin
+## Simple usage
+* tt++ stickmud.tin: Start the pack.
+* login: open a connection to stickmud.
+* charswitch: Log out and wait 5 minutes before reconnecting -- useful for mchar timeouts.
+* More documentation coming soon (tm)!
