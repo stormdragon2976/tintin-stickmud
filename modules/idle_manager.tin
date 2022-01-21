@@ -1,0 +1,66 @@
+#ACTION {^You have been idle, and are pulled into the void.$}
+{
+	#if {!&{idleList}}
+	{
+		#list {idleList} {add} {pose}
+	};
+	${idleList[@list_rand{idleList}]}
+}
+{9}
+
+#ALIAS {^fortune %1}
+{
+	#script {/bin/echo -n "say ";fortune -sn1000 %1 | tr '[:space:];' ' '}
+}
+{9}
+
+#ALIAS {^fortune$}
+{
+	#script {/bin/echo -n "say ";fortune -sn1000 | tr '[:space:];' ' '}
+}
+{9}
+
+#ALIAS {^idle %1}
+{
+	#list {idleList} {clear};
+	#list {idleList} {add} {@strip_braces{%1}};
+	idle
+}
+{9}
+
+#ALIAS {^idle$}
+{
+	#local {i} {};
+	#if {!&{idleList}}
+	{
+		#list {idleList} {add} {pose}
+	};
+	#echo {Current commands to avoide the void are:};
+	#foreach {*{idleList[]}} {i}
+	{
+		#echo {${idleList[$i]}}
+	};
+	#echo {To set your idle commands, type idle followed by a list of commands enclosed in braces and separated by semi-colons.}
+}
+{9}
+
+#EVENT {MINUTE}
+{
+	#script {idle[time]} {date '+%s'};
+	#variable {idle[time]} {${idle[time][1]}};
+	#math {idle[seconds]} {${idle[time]} - ${idle[lastUse]}};
+	#if {${idle[seconds]} > 300}
+	{
+		#if {!&{idleList}}
+		{
+			#list {idleList} {add} {pose}
+		};
+		${idleList[@list_rand{idleList}]}
+	}
+}
+
+#EVENT {SEND OUTPUT}
+{
+	#script {idle[lastUse]} {date '+%s'};
+	#variable {idle[lastUse]} {${idle[lastUse][1]}}
+}
