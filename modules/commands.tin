@@ -12,7 +12,7 @@
 
 #ALIAS {^charswitch$}
 {
-    #gts {#line oneshot #ticker {recon} {login} {300}};
+    #gts {#delay {300} {login}};
     quit;
     #showme {Login will execute in 5 minutes.}
 }
