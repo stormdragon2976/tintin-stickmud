@@ -5,7 +5,8 @@
         #return
     };
     #class {$name} {write} {${HOME}/${name}};
-    #line substitute variables #history {write} {${HOME}/${name}.history}
+    #line substitute variables #history {write} {${HOME}/${name}.history};
+#map {write} {${HOME}/map}
 }
 {9}
 
@@ -83,6 +84,5 @@
 #VARIABLE {name} {}
 
 #event {SESSION DISCONNECTED} {
-CSAVE;
-#map {write} {${home}/map}
+CSAVE
 }
