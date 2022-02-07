@@ -71,7 +71,6 @@
         }
     };
 #script {if [ ! -f "${HOME}/map" ] ; then cp map "${HOME}/map" ; fi ; echo "#map {read} {${HOME}/map};"};
-#map flag nofollow;
     #line oneshot #ticker {openchar} {#class {$name} {open}} {0.1};
     #variable {OLD_NAME} {$name}
 }

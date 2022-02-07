@@ -5,6 +5,7 @@
         #delay {0.05} {UPDATE_MAP %1};
         #return
     };
+    #map flag nofollow on;
     #local {i} {};
     #local {tmp} {%1};
     #if {{$OLD_AREA_NAME} != {${tmp[area]}}}
