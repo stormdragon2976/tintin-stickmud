@@ -1,3 +1,90 @@
+#ALIAS {^goto continue$}
+{
+    #variable {mapping} {1};
+    #path move 1;
+    #path walk;
+    #line oneshot #ticker {check_room} {CHECK_GOTO_ROOM} {4}
+}
+{8}
+
+#ALIAS {^goto {tigers|lordius|bats|hippies|zoo|shire|wonderland|newbie|well|clearing|oak|giantvalley}$}
+{
+    #switch {{%1}}
+    {
+        #case {{giantvalley}}
+        {
+            goto {Valley}
+        };
+        #case {{tigers}}
+        {
+            goto {Kilrathian Tower}
+        };
+        #case {{lordius}}
+        {
+            goto {A forest clearing}
+        };
+        #case {{bats}}
+        {
+            goto {Entrance to a large cave}
+        };
+        #case {{zoo}}
+        {
+            goto {The beginning of Doomdark's domain}
+        };
+        #case {{hippies}}
+        {
+            goto {Hippie drumcircle}
+        };
+        #case {{wonderland}}
+        {
+            goto {Park gates}
+        };
+        #case {{newbie}}
+        {
+            goto {Newbie Park}
+        };
+        #case {{well}}
+        {
+            goto {Market Square, at Well and Gallows}
+        };
+        #case {{clearing}}
+        {
+            goto {Clearing}
+        };
+        #case {{oak}}
+        {
+            goto {The eastern end of the Northern Highway}
+        };
+        #case {{shire}}
+        {
+            goto {Inside an oak}
+        };
+        #default
+        {
+            NOTIFY Oopsie, this area doesn't have any instructions. Contact a maintainer of the pack.
+        }
+    }
+}
+{8}
+
+#ALIAS {^CHECK_GOTO_ROOM$}
+{
+    #local {dir} {};
+    #local {pos} {};
+    #local {path} {};
+    #if {${GMCP_ROOM_INFO[num]} == ${last_room}}
+    {
+        #path move -1;
+        #path get position pos;
+        #path save forward path;
+        #list {path} {create} {$path};
+        #variable {dir} {${path[$pos]}};
+        NOTIFY It appears the mapper's last move failed. Please go $dir, and after succeeding, type goto continue.;
+        #variable {mapping} {0}
+    }
+}
+{9}
+
 #ALIAS {^UPDATE_MAP %*$}
 {
     #if {{$name} == {}}
@@ -24,6 +111,43 @@
     #foreach {*{tmp[exits][]}} {i}
     {
         #map {dig} {${i}} {${tmp[exits][$i]}}
+    };
+    #if {${mapping}}
+    {
+        #local {pos} {};
+        #local {size} {};
+        #path get position pos;
+        #path get length size;
+        #unticker {check_room};
+        #if {$pos > $size}
+        {
+            NOTIFY Mapping finished.;
+            SYNTH_PLAY notificationSound;
+            #variable {mapping} {0};
+            #unticker {check_room}
+        };
+        #else
+        {
+            #line oneshot #ticker {check_room} {CHECK_GOTO_ROOM} {4};
+            #path walk;
+            #variable {last_room} {${tmp[num]}}
+        }
+    }
+}
+{9}
+
+#ALIAS {^goto %*$}
+{
+    #local {length} {0};
+    #path destroy;
+    #map find {@strip_braces{%1}};
+    #path get length length;
+    #if {$length > 0}
+    {
+        #path walk;
+        #line oneshot #ticker {check_room} {CHECK_GOTO_ROOM} {4};
+        #variable {mapping} {1};
+        #variable {last_room} {${GMCP_ROOM_INFO[num]}}
     }
 }
 {9}
@@ -36,4 +160,7 @@
 }
 
 
+
+#VARIABLE {last_room} {0}
+#VARIABLE {mapping} {0}
 
