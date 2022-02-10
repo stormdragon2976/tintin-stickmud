@@ -7,10 +7,14 @@
 }
 {8}
 
-#ALIAS {^goto {tigers|lordius|bats|hippies|zoo|shire|wonderland|newbie|well|clearing|oak|giantvalley}$}
+#ALIAS {^goto {tigers|lordius|bats|hippies|zoo|shire|wonderland|newbie|well|clearing|oak|giantvalley|gorthaur}$}
 {
     #switch {{%1}}
     {
+        #case {{gorthaur}}
+        {
+            goto {The valley of Gorthaur}
+        };
         #case {{giantvalley}}
         {
             goto {Valley}
