@@ -1,3 +1,9 @@
+#ACTION {^%* returns to its own plane of existance.$}
+{
+    SYNTH_PLAY warningSound
+}
+{9}
+
 #ACTION {^As %* falls, there is a bright flash!$}
 {
     #nop {Hook name: flash};
