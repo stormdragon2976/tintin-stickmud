@@ -70,7 +70,7 @@
             ${c_${z}Startup}
         }
     };
-#script {if [ ! -f "${HOME}/map" ] ; then cp map "${HOME}/map" ; fi ; echo "#map {read} {${HOME}/map};"};
+#script {if [ ! -f "${HOME}/map" ] ; then cp map "${HOME}/map" ; fi ; echo "#map {read} {${HOME}/map};" ; echo "#map sync map;"};
     #line oneshot #ticker {openchar} {#class {$name} {open}} {0.1};
     #variable {OLD_NAME} {$name}
 }
