@@ -1,4 +1,4 @@
-#ACTION {^{.+ returns to its own plane of existance\.|Your image disintegrates to atoms and vanishes\.|.+'s shadow reunites with its master\.}$}
+#ACTION {^{.+ returns to its own plane of existance\.|Your image disintegrates to atoms and vanishes\.|.+'s shadow reunites with its master\.|Your ki reverts back to its normal flow\.}$}
 {
     SYNTH_PLAY warningSound
 }
