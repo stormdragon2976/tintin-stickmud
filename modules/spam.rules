@@ -1,4 +1,5 @@
 #gag {^{You turn on your heels and mumble, "Scanning... Beep boop, beep boop...".|Your scan of the surroundings:}$} {5}
+#gag {^Whoah! You quickly dodge %*'s hit and spin around for an opportunistic strike!$} {5}
 #gag {^Whoah! You totally dodge %*'s hit!$} {5}
 #gag {^You {dodge|twist|sidestep|leap|jump|duck} badly allowing %* a better strike!$} {5}
 #gag {^You dodge badly, leaving you prone to a better strike!$} {5}
@@ -7,6 +8,7 @@
 #gag {^You try dodging %*'s hit, but only manage to lessen the impact.$} {5}
 #gag {^You fail to {dodge|twist|sidestep|leap|jump|duck} properly and take the full brunt of the attack.$} {5}
 #gag {^Whoah! %* totally dodges %*'s hit!$} {5}
+#gag {^Whoah! %* quickly dodges %*'s hit and spins around for an opportunistic strike!$} {5}
 #gag {^%* {dodge|twist|sidestep|leap|jump|duck}s badly allowing %* a better strike!$} {5}
 #gag {^%* dodges badly, leaving %* prone to a better strike!$} {5}
 #gag {^%* tries to {dodge|twist|sidestep|leap|jump|duck} out of harms way, but still manages to get partially hit.$} {5}
