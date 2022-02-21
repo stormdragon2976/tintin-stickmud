@@ -7,10 +7,14 @@
 }
 {8}
 
-#ALIAS {^goto {tigers|lordius|bats|hippies|zoo|shire|wonderland|newbie|well|clearing|oak|giantvalley|gorthaur|smurfcastle}$}
+#ALIAS {^goto {tigers|lordius|bats|hippies|zoo|shire|wonderland|newbie|well|clearing|oak|giantvalley|gorthaur|smurfcastle|dragonking}$}
 {
     #switch {{%1}}
     {
+        #case {{dragonking}}
+        {
+            goto {A dark path}
+        };
         #case {{smurfcastle}}
         {
             goto {Courtyard, at the well}
