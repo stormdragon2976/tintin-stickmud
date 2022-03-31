@@ -80,6 +80,47 @@
 
 
 
+#EVENT {VARIABLE UPDATE GMCP_CHAR_STATUS}
+{
+    #local {tmp} {%1};
+    #if {{${tmp[enemy_health]}} != {${audioprompt[oldEhealth]}}}
+    {
+        #variable {audioprompt[oldEhealth]} {${tmp[enemy_health]}};
+        #switch {{${tmp[enemy_health]}}}
+        {
+            #case {{in good shape}}
+            {
+                SYNTH_PLAY enemyGoodShape
+            };
+            #case {{slightly hurt}}
+            {
+                SYNTH_PLAY enemySlightlyHurt
+            };
+            #case {{not in good shape}}
+            {
+                SYNTH_PLAY enemyNotGoodShape
+            };
+            #case {{in bad shape}}
+            {
+                SYNTH_PLAY enemyBadShape
+            };
+            #case {{in very bad shape}}
+            {
+                SYNTH_PLAY enemyVBadShape
+            };
+            #case {{0}}
+            {
+                #nop nothing!
+            };
+            #default
+            {
+                NOTIFY Unknown enemy health value ${tmp[enemy_health]}. Please alert a developer of the pack.;
+                #system {echo "${tmp[enemy_health]}" >> "${HOME}/bad_ehealth" ; sort -u "${HOME}/bad_ehealth" -o "${HOME}/bad_ehealth"}
+            }
+        }
+    }
+}
+
 #EVENT {VARIABLE UPDATE GMCP_CHAR_VITALS}
 {
     #local {tmp} {%1};
@@ -101,6 +142,7 @@
 
 #VARIABLE {audioprompt}
 {
+    {oldEhealth} {0}
     {oldHealth} {0}
     {oldMana} {0}
     {oldStamina} {0}
