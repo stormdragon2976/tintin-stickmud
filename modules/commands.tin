@@ -24,6 +24,12 @@
 }
 {9}
 
+#ALIAS {^whoami$}
+{
+    NOTIFY You are ${GMCP_CHAR_NAME[fullname]}.
+}
+{9}
+
 
 
 
